@@ -3962,17 +3962,24 @@ var render = function() {
         1
       ),
       _c(
-        "uni-popup",
-        { ref: "popup", attrs: { _i: 33 } },
+        "v-uni-view",
+        { style: _vm._$g(33, "s"), attrs: { _i: 33 } },
         [
-          _c("uni-popup-share", {
-            attrs: { _i: 34 },
-            on: {
-              select: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            }
-          })
+          _c(
+            "uni-popup",
+            { ref: "popup", attrs: { _i: 34 } },
+            [
+              _c("uni-popup-share", {
+                attrs: { _i: 35 },
+                on: {
+                  select: function($event) {
+                    return _vm.$handleViewEvent($event)
+                  }
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -5668,7 +5675,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-uni-view",
-    { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
+    { staticClass: _vm._$g(0, "sc"), style: _vm._$g(0, "s"), attrs: { _i: 0 } },
     [
       _c(
         "v-uni-view",
@@ -5736,6 +5743,7 @@ var render = function() {
             "v-uni-button",
             {
               staticClass: _vm._$g(9, "sc"),
+              style: _vm._$g(9, "s"),
               attrs: { _i: 9 },
               on: {
                 click: function($event) {
