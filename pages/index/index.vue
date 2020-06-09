@@ -368,8 +368,14 @@
 					mask: false
 				})
 				uni.request({
+					// #ifdef H5
+					url: "/toutiao/list/?ac=wap&format=json_raw&tag=" + this.tabBars[i].type +
+						"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+					// #endif
+					// #ifndef H5
 					url: "https://m.toutiao.com/list/?ac=wap&format=json_raw&tag=" + this.tabBars[i].type +
 						"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+					// #endif
 					header: {
 						'Cookie': '__utma=252651093.67706439.1584015024.1584015024.1584015024.1; __utmz=252651093.1584015024.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tt_webid=6803298091418437133; UM_distinctid=170cebb9dd6cd-094ddc63b2ac67-b781636-144000-170cebb9dd7431; _ga=GA1.2.315616392.1584016367; csrftoken=fa925c7e673269eff8dad21b09d1fbaf' //自定义请求头信息
 					},
@@ -403,8 +409,14 @@
 				if (item.loadmore !== '上拉加载更多') return;
 				item.loadmore = "加载中";
 				uni.request({
+					//#ifdef H5
+					url: "/toutiao/list/?ac=wap&format=json_raw&tag=" + this.tabBars[index].type +
+						"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+					//#endif
+					//#ifndef H5
 					url: "https://m.toutiao.com/list/?ac=wap&format=json_raw&tag=" + this.tabBars[index].type +
 						"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+					//#endif
 					header: {
 						'Cookie': '__utma=252651093.67706439.1584015024.1584015024.1584015024.1; __utmz=252651093.1584015024.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tt_webid=6803298091418437133; UM_distinctid=170cebb9dd6cd-094ddc63b2ac67-b781636-144000-170cebb9dd7431; _ga=GA1.2.315616392.1584016367; csrftoken=fa925c7e673269eff8dad21b09d1fbaf' //自定义请求头信息
 					},
@@ -464,8 +476,14 @@
 						mask: false
 					})
 					uni.request({
+						// #ifdef H5
+						url: "/toutiao/list/?ac=wap&format=json_raw&tag=" + this.tabBars[i].type +
+							"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+						// #endif
+						// #ifndef H5
 						url: "https://m.toutiao.com/list/?ac=wap&format=json_raw&tag=" + this.tabBars[i].type +
 							"&as=A175ADC1C1BAE7E&cp=5D118A3E877E8E1&_signature=f60bLAAAIr6R60RntmQLRn-tGz", //仅为示例，并非真实接口地址。
+						// #endif
 						header: {
 							'Cookie': '__utma=252651093.67706439.1584015024.1584015024.1584015024.1; __utmz=252651093.1584015024.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tt_webid=6803298091418437133; UM_distinctid=170cebb9dd6cd-094ddc63b2ac67-b781636-144000-170cebb9dd7431; _ga=GA1.2.315616392.1584016367; csrftoken=fa925c7e673269eff8dad21b09d1fbaf' //自定义请求头信息
 						},

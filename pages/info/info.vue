@@ -120,7 +120,12 @@
 			}
 			//获取新闻详情
 			uni.request({
+				// #ifdef H5
+				url: '/toutiao/i' + this.news_id + '/info/?_signature=mvD7gBATx-10tqTLvd1hNJrw-5&i=' + this.news_id,
+				// #endif
+				// #ifndef H5
 				url: 'https://m.toutiao.com/i' + this.news_id + '/info/?_signature=mvD7gBATx-10tqTLvd1hNJrw-5&i=' + this.news_id,
+				// #endif
 				method: "GET",
 				data: {},
 				success: res => {
@@ -162,7 +167,7 @@
 				method: "GET",
 				data: {
 					news_id: this.news_id,
-					user_id: this.user.user_id
+					user_id: this.user.user_id == undefined?'':this.user.user_id
 				},
 				success: res => {
 					this.digg_count = res.data.digg_count;
@@ -223,7 +228,7 @@
 				method: "GET",
 				data: {
 					news_id: this.news_id,
-					user_id: this.user.user_id
+					user_id: this.user.user_id == undefined?'':this.user.user_id
 				},
 				success: res => {
 					this.digg_count = res.data.digg_count;
