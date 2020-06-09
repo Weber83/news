@@ -1,16 +1,24 @@
 <template>
 	<view>
-		<uni-icons v-if="this.flag" :style="topc" type="arrowthinup" size="30" @tap="top()"></uni-icons>
 		<!-- 顶部选项卡 -->
 		<scroll-view scroll-x class="scroll-row border-bottom" :scroll-into-view="scrollInto" scroll-with-animation="" style="height: 100rpx;"
 		 :style="skinMode?'background-color: #F5F7F9;':'background-color: rgba(0,0,0,0.3)'">
 			<view v-for="(item,index) in tabBars" :key="index" class="scroll-row-item px-3 py-2 font-md" :id="'tab'+index"
 			 :class="tabIndex === index ? 'font-lg font-weight-bold '+textmain :''" @click="changeTab(index)">{{item.name}}</view>
+			 <view class="scroll-row-item px-3 py-2 font-md">
+				 <view @click="showEdit">
+					 <text class="iconfont icon-shezhi"></text>
+					 编辑
+				 </view>
+			 </view>
 		</scroll-view>
+		<view v-show="isShow">
+			<dragSort :list="tabBars" :props="props" @change="onDragSortChange"></dragSort>
+		</view>
 		<!-- 内容块滑动 -->
 		<swiper :duration="150" :current="tabIndex" @change="onChangeTab" :style="'height:'+scrollH+'px;'+skin">
 			<swiper-item v-for="(item1,index1) in tabBars" :key="index1">
-				<scroll-view scroll-y="true" :style="'height:2000rpx;'" :scroll-top="scrollTop" @scrolltolower="loadmore(index1)" @scrolltoupper="refresh(index1)" @scroll='scroll'>
+				<scroll-view scroll-y="true" :style="'height:'+scrollH+'px;'" @scrolltolower="loadmore(index1)" @scrolltoupper="refresh(index1)">
 					<template v-if="news_list[index1].list.length>0">
 						<block v-for="(item2,index2) in news_list[index1].list" :key="index2">
 							<common-list :item="item2" :index="index2" :fontSize="fontSize"></common-list>
@@ -34,12 +42,14 @@
 	import divider from '@/components/custom/divider/divider.vue'
 	import noThing from '@/components/custom/no-thing/no-thing.vue'
 	import loadMore from '@/components/custom/load-more/load-more.vue'
+	import dragSort  from '@/components/drag-sort/index.vue'
 	export default {
 		components: {
 			commonList,
 			divider,
 			noThing,
-			loadMore
+			loadMore,
+			dragSort 
 		},
 		computed: {
 			skin() {
@@ -51,6 +61,12 @@
 		},
 		data() {
 			return {
+				//编辑页是否显示
+				isShow: false, 
+				//拖拽插件使用
+				props: {
+				        label: 'label'
+				},
 				//用户id
 				userID: '',
 				//夜间模式
@@ -67,68 +83,87 @@
 				//顶部选项卡
 				tabBars: [
 					{
+					label: "热点",
 					name: "热点",
 					type: "news_hot"
 				}, {
+					label: "社会",
 					name: "社会",
 					type: "news_society"
 				}, {
+					label: "娱乐",
 					name: "娱乐",
 					type: "news_entertainment"
 				}, {
+					label: "科技",
 					name: "科技",
 					type: "news_tech"
 				}, {
+					label: "军事",
 					name: "军事",
 					type: "news_military"
 				}, {
+					label: "体育",
 					name: "体育",
 					type: "news_sports"
 				}, {
+					label: "汽车",
 					name: "汽车",
 					type: "news_car"
 				}, {
+					label: "财经",
 					name: "财经",
 					type: "news_finance"
 				}, {
+					label: "国际",
 					name: "国际",
 					type: "news_world"
 				}, {
+					label: "时尚",
 					name: "时尚",
 					type: "news_fashion"
 				}, {
+					label: "旅游",
 					name: "旅游",
 					type: "news_travel"
 				}, {
+					label: "探索",
 					name: "探索",
 					type: "news_discovery"
 				}, {
+					label: "育儿",
 					name: "育儿",
 					type: "news_baby"
 				}, {
+					label: "养生",
 					name: "养生",
 					type: "news_regimen"
 				}, {
+					label: "故事",
 					name: "故事",
 					type: "news_story"
 				}, {
+					label: "美文",
 					name: "美文",
 					type: "news_essay"
 				}, {
+					label: "游戏",
 					name: "游戏",
 					type: "news_game"
 				}, {
+					label: "历史",
 					name: "历史",
 					type: "news_history"
 				}, {
+					label: "美食",
 					name: "美食",
 					type: "news_food"
 				}],
 				//回到顶部
-				flag:false,
-				scrollTop:-1,
-				old:{scrollTop:0},
-				topc:"position: fixed;z-index:99;right:20px; bottom:100px;",
+				//flag:false,
+				//scrollTop:-1,
+				//old:{scrollTop:0},
+				//topc:"position: fixed;z-index:99;right:20px; bottom:100px;",
 				news_list: []
 			}
 		},
@@ -275,6 +310,35 @@
 			})
 		},
 		methods: {
+			showEdit(){
+			    this.isShow = ! this.isShow
+			},
+			onDragSortChange (e) {
+//			    console.log(e)
+				var tempList = []
+				//如果移到了第一位
+				if(!e.frontData){
+					tempList.push(e.data)
+				}
+				for(var i = 0 ;i<this.tabBars.length; i++)
+				{
+					//被移动的元素
+					if(this.tabBars[i].label === e.data.label) { continue ;}
+					//移动到哪个元素的后面
+					if(this.tabBars[i].label === e.frontData.label)
+					{
+						tempList.push(e.frontData)
+						tempList.push(e.data)
+						continue;
+					}
+					tempList.push(this.tabBars[i])
+				}
+				this.tabBars = tempList
+				//console.log(this.tabBars)
+			      // frontData 插到谁后面
+			      // data 操作的数据
+			},
+			/*
 			scroll(e){
 				this.scrollTop=e.detail.scrollTop;
 				if(e.detail.scrollTop>50){
@@ -291,7 +355,8 @@
                     this.scrollTop=0;
                 });
 				this.scrollTop=-1;
-			},			
+			},
+			*/
 			//切换上方的状态栏时记录当前状态栏索引
 			onChangeTab(e) {
 				this.changeTab(e.detail.current);
