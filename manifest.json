@@ -72,36 +72,105 @@
             }
         }
     },
-    "h5": {
-		"devServer": {
-			"proxy": {
-				"/toutiao": {
-					"target": "https://m.toutiao.com",
-					"changeOrigin": true,
-					"secure": false,
-					"pathRewrite": {
-						"^/toutiao": ""
-					}
-				},
-				"/qingfuwu":{
-					"target": "https://af1o32.toutiao15.com",
-					"changeOrigin": true,
-					"secure": false,
-					"pathRewrite": {
-						"^/qingfuwu": ""
-					}
-				},
-				"/xigua3":{
-					"target": "http://v3-default.ixigua.com",
-					"changeOrigin": true,
-					"secure": false,
-					"pathRewrite": {
-						"^/xigua3": ""
-					}
-				}
-			}
-		}
-	},
+    "h5" : {
+        "devServer" : {
+            "proxy" : {
+                "/toutiao" : {
+                    "target" : "https://m.toutiao.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/toutiao" : ""
+                    }
+                },
+                "/qingfuwu" : {
+                    "target" : "https://af1o32.toutiao15.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/qingfuwu" : ""
+                    }
+                },
+                "/xigua1" : {
+                    "target" : "http://v1-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua1" : ""
+                    }
+                },
+                "/xigua2" : {
+                    "target" : "http://v2-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua2" : ""
+                    }
+                },
+                "/xigua3" : {
+                    "target" : "http://v3-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua3" : ""
+                    }
+                },
+                "/xigua4" : {
+                    "target" : "http://v4-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua4" : ""
+                    }
+                },
+                "/xigua5" : {
+                    "target" : "http://v5-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua5" : ""
+                    }
+                },
+                "/xigua6" : {
+                    "target" : "http://v6-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua6" : ""
+                    }
+                },
+                "/xigua7" : {
+                    "target" : "http://v7-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua7" : ""
+                    }
+                },
+                "/xigua8" : {
+                    "target" : "http://v8-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua8" : ""
+                    }
+                },
+                "/xigua9" : {
+                    "target" : "http://v9-default.ixigua.com",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/xigua9" : ""
+                    }
+                }
+            }
+        },
+        "title" : "news",
+        "router" : {
+            "base" : "/h5/",
+            "mode" : "history"
+        }
+    },
     /* 快应用特有相关 */
     "quickapp" : {},
     /* 小程序特有相关 */

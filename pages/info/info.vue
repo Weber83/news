@@ -496,7 +496,12 @@
 					},
 					success: res=>{
 						//console.log(res);
-						this.video_source = res.data;
+						// #ifdef H5
+						this.video_source = res.data.h5_url;
+						// #endif
+						// #ifndef H5
+						this.video_source = res.data.real_url;
+						// #endif
 						//console.log(this.video_source);
 					}
 				})
