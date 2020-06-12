@@ -64,7 +64,7 @@
 		<!-- 输入弹框 -->
 		<uni-popup type="bottom" ref="popup_textarea">
 			<view class="comment_bar_2" :style="skinMode?'':'background-color: #b9b9b9; border-top: 1rpx solid #b5b5b5'">
-				<textarea adjust-position="false" class="comment_textarea" :placeholder="'回复'+replied_name+'...'"
+				<textarea class="comment_textarea" :placeholder="'回复'+replied_name+'...'"
 				 v-model="reply_content" :style="skinMode?'':'background-color: #d0d0d0'"/>
 				<text :class="['send_comment',reply_content.length >= 1?'comment_active':'']" @click="send_reply">发布</text>
 			</view>
