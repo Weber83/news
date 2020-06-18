@@ -9,7 +9,7 @@
 					<view class="news_info flex align-center">
 						<view class="author_time flex justify-start" @click="openDetail(item.news_id)">
 							<view class="mr-2" style="color: #999999;line-height: 1.3;" :class="fontSizeDetail">{{item.media_name}}</view>
-							<text style="color: #9D9589;line-height: 1.3;" :class="fontSizeDetail">{{item.publish_time}}</text>
+							<text style="color: #9D9589;line-height: 1.3;" :class="fontSizeDetail">{{timestampToTime_(item.publish_time)}}</text>
 						</view>
 						<view class="star_digg flex">
 							<view class="star" @click="collect_new(item)">
@@ -81,21 +81,22 @@
 
 			//获取新闻id列表
 			uni.request({
-				url: "https://af1o32.toutiao15.com/getCollectByUid",
+				url: "https://af1o32.toutiao15.com/getCollectByUid2",
 				data: {
 					user_id: this.userid,
 				},
 				method: 'POST',
 				success: (res) => {
-					for (var i = 0; i < res.data.result.length; i = i + 1) {
-						//向this.data_list中填充数据
-						this.setDataList(res.data.result[i].news_id, res.data.result[i].updatedAt);
+					this.data_list = res.data.result;
+					console.log(this.data_list);
+					for(var i = 0;i < data_list.length;i++)
+					{
+						this.data_list[i].publish_time = "123432";
 					}
 				}
 			});
 
-			//排序
-			console.log(this.data_list);
+			
 		},
 		onPullDownRefresh() {
 			uni.redirectTo({
@@ -118,37 +119,6 @@
 				return Y + M + D + h + m + s;
 			},
 
-			//设置新闻列表内容
-			setDataList(news_id, update_time) {
-				var temp = {};
-				uni.request({
-					url: 'https://af1o32.toutiao15.com/get_news_info',
-					method: "GET",
-					data: {
-						news_id: news_id,
-						user_id: this.userid
-					},
-					success: res => {
-						this.$set(temp, 'delete_mark', 0);
-						this.$set(temp, 'update_time', update_time);
-						this.$set(temp, 'news_id', news_id);
-						this.$set(temp, 'digg_count', res.data.digg_count);
-						this.$set(temp, 'is_digg', res.data.is_digg);
-						this.$set(temp, 'is_star', res.data.is_star);
-					}
-				})
-				uni.request({
-					url: 'https://m.toutiao.com/i' + news_id + '/info/?_signature=mvD7gBATx-10tqTLvd1hNJrw-5&i=' + news_id,
-					method: "GET",
-					success: res => {
-						this.$set(temp, 'title', res.data.data.title);
-						this.$set(temp, 'media_name', res.data.data.detail_source);
-						this.$set(temp, 'publish_time', this.timestampToTime_(res.data.data.publish_time));
-						this.data_list.push(temp);
-					}
-				})
-
-			},
 			//点击进入详情页面
 			openDetail(news_id) {
 				uni.navigateTo({
