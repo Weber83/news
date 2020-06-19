@@ -183,7 +183,6 @@
 		bottom: 0;
 		z-index: -1;
 	}
-
 	.news_info{
 		justify-content: space-between;
 	}
